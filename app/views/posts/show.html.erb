@@ -1,0 +1,38 @@
+
+<header class="intro-header" style="background-image: url('<%= @post.image %>')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p id="notice"><%= notice %></p>
+                <div class="post-heading">
+                    <h1><%= @post.title %></h1>
+                    <h2 class="subheading"><%= @post.subtitle %></h2>
+                    <span class="meta"><%= @post.author %> on <%= @post.created_at %></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<article>
+    <div class="container">
+        <div class="row">
+          <%= @post.content.html_safe %>
+        </div>
+    </div>
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+    <%= link_to 'Back', posts_path %>
+</article>
+
+<div class="container">
+
+    <%= render '/comments/form', comment: @comment %>
+
+
+    <% @post.comments.each do |comment| %>
+        <p>Comment by: <%= comment.author %></p>
+        <p><%= comment.body %></p>
+        <hr>
+    <% end %>
+</div>
